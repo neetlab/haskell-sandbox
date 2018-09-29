@@ -97,6 +97,10 @@ stack exec hoogle generate
 
 生成されたデータベースは `~/.hoogle` 内に保存されました。
 
+## Visual Studio Codeの設定
+HIEを見つけてくれなかったので手動でpathを指定しました。
+![screenshot](https://i.imgur.com/dfyM0oa.png)
+
 <!-- REFERENCIES -->
 [^1]: https://github.com/haskell/haskell-ide-engine
 
