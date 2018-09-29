@@ -17,7 +17,7 @@ The Glorious Glasgow Haskell Compilation System, version 8.4.3
 ```
 
 ### Cabal
-後述の [Haskell IDE Engine](#Haskell IDE Engine)のインストールに必要なため、Cabalというパッケージマネージャーをインストールします。
+後述の [Haskell IDE Engine](#haskell-ide-engine)のインストールに必要なため、Cabalというパッケージマネージャーをインストールします。
 
 ```
 stack install cabal-install
