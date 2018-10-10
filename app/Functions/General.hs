@@ -1,4 +1,4 @@
-module Function where
+module Functions.General where
 
 myFunc :: String -> String
 myFunc x = "Hello " ++ x

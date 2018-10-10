@@ -1,4 +1,4 @@
-module HighOrderFunction where
+module Functions.HighOrderFunction where
 
 -- ts: applyTwice<A>(x: (a -> A), y: A): A
 applyTwice :: (a -> a) -> a -> a
