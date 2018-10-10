@@ -7,7 +7,7 @@ module Functions.Reducers where
 -- 〈翼など〉を閉じる (↔ unfold); 折って…を作る
 
 -- 実装部分の右辺 foldl1 は関数を返すけど、カリー化されてるから
--- 3rd引数 (対象になる配列) を省略していい感じに
+-- 3rd引数 (対象になる配列) を省略していい感じに = ポイントフリースタイル
 maximum' :: (Ord num) => [num] -> num
 maximum' = foldl1 (\prev curr -> if curr > prev then curr else prev)
 
