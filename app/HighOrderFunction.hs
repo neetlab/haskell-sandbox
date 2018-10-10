@@ -11,12 +11,10 @@ zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 
 -- Haskellがすごいことがよく分かるTypeScriptとの対比:
 --
--- const zipWith = <A, B, C>(f: (...args: any[]) => any, a: A[], b: B[]): C[] => {
---   if (!a || !b) {
+-- const zipWith = <A, B, C>(f: (...args: any[]) => any, [x, ...xs]: A[], [y, ...ys]: B[]): C[] => {
+--   if (!(x && xs && y && ys)) {
 --     return [];
 --   }
---   const [x, ...xs] = a;
---   const [y, ...ys] = b;
 --   return [
 --     ...f(x, y),
 --     ...zipWith(f, xs, ys)
