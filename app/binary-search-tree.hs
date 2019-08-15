@@ -1,3 +1,5 @@
+module BinarySearchTree where
+
 -- 二分探索木では、ひとつのノードが2つの子ノードの参照を持つ
 -- EmptyTree: 引数なしの値コンストラクタ
 -- Node:      自分 -> 子要素 -> 子要素 な値コンストラクタ

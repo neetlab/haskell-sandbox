@@ -1,3 +1,5 @@
+module TypeClasses where
+
 -- 型クラスはeqとかordとかを定義するインターフェイスのようなもの
 
 -- Eq型クラス: == と /= を実装する
