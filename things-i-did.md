@@ -16,6 +16,13 @@ $ stack ghc -- --version
 The Glorious Glasgow Haskell Compilation System, version 8.4.3
 ```
 
+**編集:** コンパイラーの利用
+```
+$ echo 'main = putStrLn "hello, world"' > hello.hs
+$ stack ghc -- --make hello.hs
+$ ./hello
+```
+
 ### Cabal
 後述の [Haskell IDE Engine](#haskell-ide-engine)のインストールに必要なため、Cabalというパッケージマネージャーをインストールします。
 
