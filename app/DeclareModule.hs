@@ -5,4 +5,4 @@ module DeclareModule where
 -- <モジュール名> はファイル名と同じである必要がある
 
 -- import <Hierarchy.Module> <(Function/Name)> [qualified <Module> as name]
-import qualified Function (myFunc) as func
+-- import qualified Function (myFunc) as func
