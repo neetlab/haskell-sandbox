@@ -21,7 +21,7 @@ main = do
   -- (f, seq) => Promise.all(seq).then(res => res.map(f)) と同じ
   mapM print [1,2,3]
 
-  -- mapM_: mapMだけど返り値を捨てる。
+  -- mapM_: mapMだけど返り値を捨てる。 JSの[].forEach vs [].map の関係と同じ
   -- printは -> ()だから[(), (), ()]が返されるけどこれを無視する
   mapM_ print [1,2,3]
 
