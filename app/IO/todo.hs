@@ -1,10 +1,11 @@
 import System.Environment
 import System.Directory
 import System.IO
+import Control.Exception
 import Data.List
 
 add :: [String] -> IO ()
-add [fileName, todoItem] = appendFile filename (todoItem ++ "\n")
+add [fileName, todoItem] = appendFile fileName (todoItem ++ "\n")
 
 view :: [String] -> IO ()
 view [fileName] = do
@@ -16,7 +17,7 @@ view [fileName] = do
 remove :: [String] -> IO ()
 remove [fileName, numberString] = do
   contents <- readFile fileName
-  let todoTasks = liens contents
+  let todoTasks = lines contents
       numberedTasks = zipWith (\n line -> show n ++ " - " ++ line) [0..] todoTasks
   putStrLn $ "These are your TO-DO items:"
   mapM_ putStrLn numberedTasks
@@ -27,10 +28,10 @@ remove [fileName, numberString] = do
       hClose tempHandle
       removeFile tempName)
     (\(tempName, tempHandle) -> do
-      hPutStr tempHandle
+      hPutStr tempHandle newTodoItems
       hClose tempHandle
       removeFile fileName
-      removeFile tempName fileName)
+      renameFile tempName fileName)
 
 handleCommandNotFound :: String -> [String] -> IO ()
 handleCommandNotFound commandName _ =
@@ -40,8 +41,8 @@ dispatch :: String -> [String] -> IO ()
 dispatch "add" = add
 dispatch "view" = view
 dispatch "remove" = remove
-dispatch _ = handleCommandNotFound
+dispatch commandName = handleCommandNotFound commandName
 
 main = do
   (command:argList) <- getArgs
-  dispatch comamnd argList
+  dispatch command argList
