@@ -32,10 +32,15 @@ remove [fileName, numberString] = do
       removeFile fileName
       removeFile tempName fileName)
 
+handleCommandNotFound :: String -> [String] -> IO ()
+handleCommandNotFound commandName _ =
+  putStrLn $ "The " ++ commandName ++ "command doesn't exist"
+
 dispatch :: String -> [String] -> IO ()
 dispatch "add" = add
 dispatch "view" = view
 dispatch "remove" = remove
+dispatch _ = handleCommandNotFound
 
 main = do
   (command:argList) <- getArgs
