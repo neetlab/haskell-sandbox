@@ -28,10 +28,12 @@ instance Functor Tree where
 --         /       \
 -- (fmap f left) (fmap f right)
 
--- Either :: left -> right -> Either left right （型引数が2つ）で
--- functorのfはカインドが * -> * （具体型 -> 具体型) じゃないといけないから
--- そのままではfunctorにできないため、型を (Either a) にして
--- 残ったb (right部分) を型引数にする
+{-
+  Either :: left -> right -> Either left right （型引数が2つ）で
+  functorのfはカインドが * -> * （具体型 -> 具体型) じゃないといけないから
+  そのままではfunctorにできないため、型を (Either a) にして
+  残ったb (right部分) を型引数にする
+-}
 instance Functor (Either a) where
   fmap f (Right x) = Right (f x)
   fmap f (Left x)  = Left x -- leftなら何もしない
