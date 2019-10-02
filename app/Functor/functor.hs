@@ -37,3 +37,11 @@ instance Functor Tree where
 instance Functor (Either a) where
   fmap f (Right x) = Right (f x)
   fmap f (Left x)  = Left x -- leftなら何もしない
+
+yell = String -> String
+yell = (++ " yeah")
+-- のとき
+(yell <$> Right "right") == Right "right yeah"
+-- だけど
+(yell <$> Left  "wrong") == Left "wrong"
+-- になる。
