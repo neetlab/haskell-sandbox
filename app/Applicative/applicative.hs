@@ -50,10 +50,30 @@ action = do
 -}
 
 {-
-Applicativeとして使いづらいからという理由で[]とは別の
+ZipList: Applicativeとして使いづらいからという理由で[]とは別の
 zip用途のZipListというのがある。
 -}
 getZipList $ (+) <$> ZipList [1,2,3] <*> ZipList [100,100,100]
 -- [101,102,103]
 (+) <$> [1,2,3] <*> [100,100,100]
 -- [101,101,101,102,102,102,103,103,103]
+
+
+{-
+liftA2: 普通の関数をApplicative functorにlift (昇格) する
+-}
+applicativeAdd = liftA2 (+)
+Just 2 `applicativeAdd` Just 3 -- Just 5
+
+-- [Applicative<T>] -> Applicative<[T]>
+sequenceA :: (Applicative f) => [f a] -> f [a]
+sequenceA [] = pure []
+sequenceA (x:xs) = (:) <$> x <*> sequenceA xs
+
+-- foldバージョン... 長い
+sequenceA' :: (Applicative f) => [f a] -> f [a]
+sequenceA' = foldr (\x xs -> (:) <$> x <*> xs) (pure [])
+
+-- fold + liftA2 COOL!!!
+sequenceA' :: (Applicative f) => [f a] -> f [a]
+sequenceA' = foldr (liftA2 (:)) (pure [])

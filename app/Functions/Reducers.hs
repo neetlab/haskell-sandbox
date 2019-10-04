@@ -9,7 +9,7 @@ module Functions.Reducers where
 -- 実装部分の右辺 foldl1 は関数を返すけど、カリー化されてるから
 -- 3rd引数 (対象になる配列) を省略していい感じに = ポイントフリースタイル
 maximum' :: (Ord num) => [num] -> num
-maximum' = foldl1 (\prev curr -> if curr > prev then curr else prev)
+maximum' = foldl1 (\curr prev -> if curr > prev then curr else prev)
 
 -- 1. (λ e [e] -> [e]) なシグネチャの `:` 関数をflipして (λ [e] e -> [e]) にする
 -- 2. flipしたやつがアキュームレータのシグネチャと合致するのでそれを渡す
