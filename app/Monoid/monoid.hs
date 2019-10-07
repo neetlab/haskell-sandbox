@@ -1,25 +1,28 @@
-{-
-newtype: 既存の型を使って新しい型を作る時に使う。
-dataでも同じことができるけど、newtypeは最適化が加わる。
--}
-newtype ZipList a = { getZipList :: [a] }
+-- Monoidの定義
+-- mになれるのは具体型のみ
+class Monoid m where
+  mempty :: m
+  mappend :: m -> m -> m
+  mconcat :: [m] -> m
+  mconcat = foldr mappend mempty
 
--- さらに、newtypeはフィールドを1つしか持てない制約がある
-newtype User = User Name Gender -- ERROR
-data User = User Name Gender    -- Works fine
+-- mempty: 演算しても結果が変わらない単位元 (identify)。多層定数って謂うらしい...
+-- mappend: m -> m -> mな関数
+-- mconcat: [m] -> mな関数。mappendさえ定義すればfoldrしてくれるデフォルト実装がある
 
-{-
-Dataで宣言した型は引き数が評価されてしまう
--}
-data CoolBool = { getCoolBool :: Bool }
--- CoolBool undefined -> Error
+-- モノイド則
+-- 単位元である保証
+mempty `mappend` x == x
+-- 交換法則
+x `mappend` mempty == x
+-- 結合法則
+(m `mappend` y) `mappend` z = x `mappend` (y `mappend` z)
 
-newtype CoolBool' = { getCoolBool :: Bool }
--- CoolBool undefined -> Works
+-- Listはmonoid (自明)
+instance Monoid [a] where
+  mempty = []
+  mappend = (++)
 
-{- 全く別の型として認識される -}
-newtype CoolString = CoolString String
-  deriving (Show)
-
-{- [Char] と CoolString は ++ できない -}
-(CoolString "foo") ++ "foo" -- errors
+-- a `mappend` b /= b `mappend` a
+"abc" `mappend` "def" == "abcdef"
+"def" `mappend` "abc" == "defabc"
