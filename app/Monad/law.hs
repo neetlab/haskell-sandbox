@@ -11,7 +11,7 @@ m >>= return == m
 Just "something" >>= return == Just "something"
 
 -- 結合法則
-f <=< g $ x == f <=< (g $ x)
+f <=< (g <=< h) == (f <=< g) <=< h
 -- 2つのモナド関数を合成できる関数 (<=<) がある
 (<=<) :: (Monad m) => (b -> m c) -> (a -> m b) -> (b -> m c)
 f <=< g = (\x -> g x >>= f)
