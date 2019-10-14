@@ -18,3 +18,11 @@ banana :: Pole -> Maybe Pole
 banana = (>> Nothing)
 
 return (0, 0) >>= (landLeft 4) >>= banana >>= (landRight 3)
+
+-- IO Monadみたいに do expression も使える
+evaluation :: []
+evaluation = do
+  initial <- return (0, 0) -- returnを必ず付けてモナドにする
+  second  <- landLeft 1 inital
+  third   <- landRight 2 second
+  return third -- モナドしか返しちゃいけないからreturnをつける

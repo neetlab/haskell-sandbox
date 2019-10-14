@@ -16,7 +16,7 @@ mempty `mappend` x == x
 -- 交換法則
 x `mappend` mempty == x
 -- 結合法則
-(m `mappend` y) `mappend` z = x `mappend` (y `mappend` z)
+(x `mappend` y) `mappend` z = x `mappend` (y `mappend` z)
 
 -- Listはmonoid (自明)
 instance Monoid [a] where
