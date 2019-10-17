@@ -1,7 +1,17 @@
+import Control.Monad.Writer
+
 module Euclid where
 
-euclideanAlgorithm :: Int -> Int -> Either String Int
-euclideanAlgorithm x y
-  | x < y            = Left "The first value must be greater than or equal to the second value"
-  | (x `mod` y) == 0 = Right y -- y == 0 = Right yでいいっぽい
-  | otherwise        = euclideanAlgorithm y (x `mod` y)
+gcd' :: Int -> Int -> Int
+gcd' a b
+  | b == 0    = a
+  | otherwise = gcd' b (a `mod` b)
+
+gcd' :: Int -> Int -> Writer [String] Int
+gcd' a b
+  | b == 0 = do
+    tell ["Finished with" ++ show a]
+    return a
+  | otherwise = do
+    tell [show a ++ " mod " ++ show b ++ " = " ++ show (a `mod` b)]
+    gcd' b (a `mod` b)

@@ -49,3 +49,42 @@ multiplyWithLog' = do
   b <- logNumber 5
   tell ["Gonna multiply these two"]
   return (a * b)
+
+--------------------
+
+-- Writerは型コンストラクタが公開されてない、代わりにwriter関数を使う
+-- 型注釈が必須
+a = writer (1, ["initialized!"]) :: Writer [String] Int
+
+-- 継ぎ足すのにはwriterを意識しないでいい
+-- モナドなのでwriterを返せば上手くやってくれる
+b = a >>= (\x -> writer (x + 1, ["incremented!!"]))
+
+-- タプルに変換できる関数がある
+runWriter b
+-- (2, ["initialized!", "incremnted!!"])
+
+-- ログをつなげる
+let (_, xs) = runWriter b in foldr (++) "" xs
+let (_, xs) = runWriter b in mapM_ putStrLn xs
+mapM_ putStrLn $ snd $ runWriter b
+
+foo :: Writer [String] Int
+foo = do
+  a <- return (1, ["initialized"])     -- <-はMonadから取り出すから, aはInt
+  b <- return (a + 1, ["incremented"]) -- Int + Int は可能
+  tell ["everything's done"]           -- tellはwriterの2ndのほうに継ぎ足せるやつ
+  return b                             -- returnは最小の文脈に入れるから、これまでの結果は保たれる
+
+-- こういう書き方もできる
+foo' :: Writer [String] Int
+foo' = do
+  tell ["initialized"]
+  let a = 0
+  let b = a + 1
+  let c = b + 1
+  tell ["added two"]
+  let d = c * 3
+  tell ["timed 3"]
+  tell ["everything's done"]
+  return d
