@@ -26,4 +26,4 @@ getInnerProduct (Vector x1 y1) (Vector x2 y2) = (x1*x2) + (y1*y2)
 
 -- なす角
 getAngle :: (Floating a) => Vector a -> Vector a -> a
-getAngle a b = acos $ (getInnerProduct a b) / (getLength a) * (getLength b)
+getAngle a b = acos $ (getInnerProduct a b) / ((getLength a) * (getLength b))
