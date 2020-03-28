@@ -16,11 +16,11 @@ getLength (Vector x y) = getDistance x y
 
 -- ベクトルの加算
 vectorAdd :: Vector -> Vector -> Vector
-vectorAdd (Vector x1 y1) (Vector x2 y2) = Vector (x1+x2 x2+y2)
+vectorAdd (Vector x1 y1) (Vector x2 y2) = Vector x1+x2 x2+y2
 
 -- ベクトルの減算
 vectorSubtract :: Vector -> Vector -> Vector
-vectorSubtract  (Vector x1 y1) (Vector x2 y2) = Vector (x1-x2 x2-y2)
+vectorSubtract  (Vector x1 y1) (Vector x2 y2) = Vector x1-x2 x2-y2
 
 -- 内積
 getInnerProduct :: Vector -> Vector -> Int
