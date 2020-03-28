@@ -22,7 +22,7 @@ vectorSubtract  (Vector x1 y1) (Vector x2 y2) = Vector (x1-x2) (x2-y2)
 
 -- 内積
 getInnerProduct :: (Floating a) => Vector a -> Vector a -> a
-getInnerProduct (Vector x1 y1) (Vector x2 y2) = (x1**x2) + (y1**y2)
+getInnerProduct (Vector x1 y1) (Vector x2 y2) = (x1*x2) + (y1*y2)
 
 -- なす角
 getAngle :: (Floating a) => Vector a -> Vector a -> a
